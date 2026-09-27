@@ -8,8 +8,7 @@ body {
 }
 
 form {
-    /* display: none; */
-    display: flex;
+    display: none;
     position: fixed;
     top: 40px;
     width: 220px;
