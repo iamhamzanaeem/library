@@ -24,7 +24,7 @@ function displayLibrary() {
         const book = myLibrary[i];
         card.classList.add("card");
         library.appendChild(card);
-        card.textContent = `Title: ${book.title}, Author: ${book.author}, Pages: ${book.pages}, Read/Unread: ${book.readStatus ? "Read ✔" : "Read ✖"}`;
+        card.textContent = `Title: ${book.title}, Author: ${book.author}, Pages: ${book.pages}`;
 
         const removeBtn = document.createElement("button");
         removeBtn.textContent = "Remove";
@@ -64,7 +64,11 @@ newBookBtn.addEventListener("click", (event) => {
 const submitBtn = document.querySelector(".submitBtn");
 submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    addBookToLibrary(title.value, author.value, pages.value, readStatus.checked);
+    const title = document.querySelector("#title").value;
+    const author = document.querySelector("#author").value;
+    const pages = document.querySelector("#pages").value;
+    const readStatus = document.querySelector("#readStatus").checked;
+    addBookToLibrary(title, author, pages, readStatus);
     displayLibrary();
 });
 
