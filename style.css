@@ -1,0 +1,9 @@
+.library{
+    background-color: brown;
+    width: 200px;
+    height: 200px;
+}
+.card{
+    background-color: beige;
+    border: 1px solid green;
+}
