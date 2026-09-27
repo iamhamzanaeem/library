@@ -1,5 +1,4 @@
 const myLibrary = [];
-
 function Book(title, author, pages, readStatus) {
     this.title = title;
     this.author = author;
@@ -7,7 +6,7 @@ function Book(title, author, pages, readStatus) {
     this.readStatus = readStatus;
     this.uniqueId = crypto.randomUUID();
 }
-Book.prototype.readToggle = function(){
+Book.prototype.readToggle = function () {
     this.readStatus = !this.readStatus
 }
 
@@ -26,7 +25,22 @@ function displayLibrary() {
         library.appendChild(card);
         card.textContent = `Title: ${book.title}, Author: ${book.author}, Pages: ${book.pages}`;
 
+        const readStatusBtn = document.createElement("button");
+        readStatusBtn.classList.add("readStatusBtn");
+        readStatusBtn.textContent = `${book.readStatus ? "Read ✔" : "Read ✖"}`;
+        card.appendChild(readStatusBtn);
+
+        readStatusBtn.addEventListener("click", (e) => {
+            book.readToggle();
+            if (book.readStatus === false) {
+                readStatusBtn.textContent = "Read ✖"
+            } else {
+                readStatusBtn.textContent = "Read ✔"
+            }
+        });
+
         const removeBtn = document.createElement("button");
+        removeBtn.classList.add("removeBtn");
         removeBtn.textContent = "Remove";
         card.appendChild(removeBtn);
         card.dataset.id = book.uniqueId;
@@ -36,19 +50,7 @@ function displayLibrary() {
             console.log(index);
             myLibrary.splice(index, 1);
             displayLibrary();
-            
-        });
-        const readStatusBtn = document.createElement("button");
-        readStatusBtn.textContent = `${book.readStatus ? "Read ✔" : "Read ✖" }`;
-        card.appendChild(readStatusBtn);
 
-        readStatusBtn.addEventListener("click", (e) => {
-            book.readToggle();
-            if(book.readStatus === false){
-                readStatusBtn.textContent = "Read ✖"
-            } else{
-                readStatusBtn.textContent = "Read ✔"
-            }
         });
     }
 }
@@ -58,11 +60,10 @@ function displayLibrary() {
 const newBookBtn = document.querySelector(".newBook");
 const newBookForm = document.querySelector(".newBookForm");
 newBookBtn.addEventListener("click", (event) => {
-    newBookForm.style.display = "block";
+    newBookForm.style.display = "flex";
 })
 
-const submitBtn = document.querySelector(".submitBtn");
-submitBtn.addEventListener("click", (e) => {
+newBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const title = document.querySelector("#title").value;
     const author = document.querySelector("#author").value;
@@ -70,6 +71,12 @@ submitBtn.addEventListener("click", (e) => {
     const readStatus = document.querySelector("#readStatus").checked;
     addBookToLibrary(title, author, pages, readStatus);
     displayLibrary();
+    newBookForm.reset();
 });
 
+const closingBtn = document.querySelector(".x-btn");
+closingBtn.addEventListener("click", (e) => {
+    newBookForm.style.display = "none";
+    
+})
 
