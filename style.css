@@ -7,3 +7,6 @@
     background-color: beige;
     border: 1px solid green;
 }
+form{
+    display: none;
+}

@@ -17,9 +17,16 @@ function addBookToLibrary(title, author, pages, readStatus){
     library.appendChild(card);
     card.textContent = `Title: ${title}, Author: ${author}, Pages: ${pages}, Read/Unread: ${readStatus ? "Read ✔" : "Read ✖"}`;
 }
-addBookToLibrary("Hello-Books", "Person", 877, false);
-addBookToLibrary("Hello-Books", "Person", 877, true);
-addBookToLibrary("Hello-Books", "Person", 877, true);
-addBookToLibrary("Hello-Books", "Person", 877, false);
-console.log(myLibrary);
 
+
+const newBookBtn = document.querySelector(".newBook");
+const newBookForm = document.querySelector(".newBookForm");
+newBookBtn.addEventListener("click", (event) => {
+    newBookForm.style.display = "block";
+})
+
+const submitBtn = document.querySelector(".submitBtn");
+submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    addBookToLibrary(title.value, author.value , pages.value , readStatus.checked);
+})
